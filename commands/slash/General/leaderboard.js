@@ -14,37 +14,49 @@ module.exports = {
     },
     run: async (client, interaction, config, ) => {
 
-
+        const fs = require('fs');
+        const path = require('path');
+            
         let transitfile = path.join(config.Client.normal, 'TranzitClassicHighRound.txt');
-        let transit = fs.readFileSync(transitfile, 'utf-8');
+        let [transitround, transitplayers] = fs.readFileSync(transitfile, 'utf8').split(';', 2);
+            
         let motdfile = path.join(config.Client.normal, 'MotdClassicHighRound.txt');
-        let motd = fs.readFileSync(motdfile, 'utf-8');
+        let [motdround, motdplayers] = fs.readFileSync(motdfile, 'utf8').split(';', 2);
+            
         let dierisefile = path.join(config.Client.normal, 'DieRiseClassicHighRound.txt');
-        let dierise = fs.readFileSync(dierisefile, 'utf-8');
+        let [dieriseround, dieriseplayers] = fs.readFileSync(dierisefile, 'utf8').split(';', 2);
+            
         let buriedfile = path.join(config.Client.normal, 'BuriedClassicHighRound.txt');
-        let buried = fs.readFileSync(buriedfile, 'utf-8');
+        let [buriedround, buriedplayers] = fs.readFileSync(buriedfile, 'utf8').split(';', 2);
+            
         let originsfile = path.join(config.Client.normal, 'OriginsClassicHighRound.txt');
-        let origins = fs.readFileSync(originsfile, 'utf-8');
+        let [originsround, originsplayers] = fs.readFileSync(originsfile, 'utf8').split(';', 2);
+            
         let townfile = path.join(config.Client.normal, 'TranzitStandardHighRound.txt');
-        let town = fs.readFileSync(townfile, 'utf-8');
+        let [townround, townplayers] = fs.readFileSync(townfile, 'utf8').split(';', 2);
+            
         let nuketownfile = path.join(config.Client.normal, 'NuketownStandardHighRound.txt');
-        let nuketown = fs.readFileSync(nuketownfile, 'utf-8');
+        let [nuketownround, nuketownplayers] = fs.readFileSync(nuketownfile, 'utf8').split(';', 2);
+            
         let tombfile = path.join(config.Client.modded, 'OriginsClassicHighRound.txt');
-        let tomb = fs.readFileSync(tombfile, 'utf-8');
+        let [tombround, tombplayers] = fs.readFileSync(tombfile, 'utf8').split(';', 2);
+
+
+        
 
         let round = new EmbedBuilder()
-            .setTitle('Leaderboard')
+            .setTitle('🏆 Leaderboard 🏆')
             .setColor(config.Client.color)
             .setThumbnail(client.thumbnail)
             .addFields(
-                { name: 'Tranzit', value: transit },
-                { name: 'Die Rise', value: dierise },
-                { name: 'Mob of the Dead', value: motd },
-                { name: 'Bueried', value: buried },
-                { name: 'Origins', value: origins },
-                { name: 'Town', value: town },
-                { name: 'Nuketown', value: nuketown },
-                { name: 'One Window Tomb', value: tomb },
+                { name: 'Tranzit', value: "Round: " + transitround + "\n" + " Player(s): " + transitplayers },
+                { name: 'Die Rise', value: "Round: " + dieriseround + "\n" + " Player(s): " + dieriseplayers },
+                { name: 'Mob of the Dead', value: "Round: " + motdround + "\n" + " Player(s): " + motdplayers },
+                { name: 'Buried', value: "Round: " + buriedround + "\n" + " Player(s): " + buriedplayers },
+                { name: 'Origins', value: "Round: " + originsround + "\n" + " Player(s): " + originsplayers },
+                { name: 'Town', value: "Round: " + townround + "\n" + " Player(s): " + townplayers },
+                { name: 'Nuketown', value: "Round: " + nuketownround + "\n" + " Player(s): " + nuketownplayers },
+                { name: 'One Window Tomb', value: "Round: " + tombround + "\n" + " Player(s): " + tombplayers },
             )
 
         interaction.reply({ embeds: [round], ephemeral: false });
